@@ -21,7 +21,8 @@ app.use(
 app.use("/api/uploadCsv", csvRoutes);
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-const mongodbUri = "mongodb://127.0.0.1:27017/jaro";
+const mongodbUri =
+  "mongodb+srv://muneebwaseem78:IudX3XDNED0oFmRA@cluster0.pdsddkf.mongodb.net/test";
 
 mongoose.connect(mongodbUri, {
   useNewUrlParser: true,
