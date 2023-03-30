@@ -10,7 +10,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    method: "GET,POST,PUT,PATCH,DELETE",
+    credentias: true,
+  })
+);
 
 app.use("/api/uploadCsv", csvRoutes);
 app.use("/public", express.static(path.join(__dirname, "public")));

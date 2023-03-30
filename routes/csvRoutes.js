@@ -3,6 +3,7 @@ const csvController = require("../controllers/csvController");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+const adminMiddleware = require("../middleware/adminMiddleware");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -38,7 +39,9 @@ const router = express.Router();
 
 //post create new media
 router.post("/create", upload.single("csvFile"), csvController.create);
-
+router.post("/login", csvController.loginUser);
+router.post("/appLogin", csvController.appLoginOrderNumber);
+router.patch("/driverLocation", csvController.driverLocation);
 router.get("/getAllUsers", csvController.getAllUsersData);
 
 module.exports = router;
