@@ -28,7 +28,7 @@ app.use("/api/uploadCsv", csvRoutes);
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 const mongodbUri =
-  "mongodb+srv://muneebwaseem78:IudX3XDNED0oFmRA@cluster0.pdsddkf.mongodb.net/test";
+  "mongodb+srv://jaro-admin:0YjGozxwl2inNEnl@cluster0.pdsddkf.mongodb.net/test";
 
 mongoose.connect(mongodbUri, {
   useNewUrlParser: true,
