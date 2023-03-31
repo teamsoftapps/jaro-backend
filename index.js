@@ -18,6 +18,12 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Hellow from Express App...",
+  });
+});
+
 app.use("/api/uploadCsv", csvRoutes);
 app.use("/public", express.static(path.join(__dirname, "public")));
 
