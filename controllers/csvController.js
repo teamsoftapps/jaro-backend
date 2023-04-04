@@ -3,6 +3,8 @@ const path = require("path");
 const csv = require("fast-csv");
 const User = require("../Models/User");
 const { resolve } = require("dns/promises");
+const sendEmail = require("../utils/sendEmail");
+const { update } = require("../Models/User");
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -17,11 +19,6 @@ exports.loginUser = async (req, res) => {
       res.status(400).json({
         status: "failed",
         message: "Password must not be empty",
-      });
-    } else if (email !== "jarotransport8080@gmail.com") {
-      res.status(403).json({
-        status: "failed",
-        message: "Incorrect Username or Password",
       });
     } else if (email === "jarotransport8080@gmail.com") {
       const adminUser = await User.findOneAndUpdate(
@@ -46,6 +43,11 @@ exports.loginUser = async (req, res) => {
           });
         }
       }
+    } else if (email !== "jarotransport8080@gmail.com") {
+      res.status(403).json({
+        status: "failed",
+        message: "Incorrect Username or Password",
+      });
     }
   } catch (err) {
     res.status(400).json({
@@ -79,6 +81,66 @@ exports.appLoginOrderNumber = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: driver,
+    });
+  }
+};
+
+exports.forgetPassword = async (req, res) => {
+  const { email } = req.body;
+
+  const adminExists = await User.findOne({ email });
+
+  console.log("admin Exists", req.body);
+
+  if (adminExists) {
+    const link = `http://localhost:3000/authentication/resetPassword`;
+    sendEmail(adminExists.email, link);
+
+    res.status(201).json({
+      status: "success",
+      message: "Reset Password link has been sent to your email",
+      admin: adminExists,
+    });
+  } else {
+    res.status(400).json({
+      status: "failed",
+      message: "No user exist with this email",
+    });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body;
+
+  try {
+    const admin = await User.findOne({ email });
+
+    if (admin.password === oldPassword) {
+      const updatePassword = await User.findOneAndUpdate(
+        { email },
+        {
+          $set: {
+            password: newPassword,
+          },
+        },
+        { new: true }
+      );
+
+      res.status(201).json({
+        status: "success",
+        message: "Your password has been updated!",
+        data: updatePassword,
+      });
+    } else {
+      res.status(400).json({
+        status: "failed",
+        message: "Cannot find user",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      message: err,
     });
   }
 };

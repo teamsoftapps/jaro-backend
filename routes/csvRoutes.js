@@ -40,6 +40,8 @@ const router = express.Router();
 //post create new media
 router.post("/create", upload.single("csvFile"), csvController.create);
 router.post("/login", csvController.loginUser);
+router.post("/forgetPassword", csvController.forgetPassword);
+router.patch("/resetPassword", csvController.resetPassword);
 router.post("/appLogin", csvController.appLoginOrderNumber);
 router.patch("/driverLocation", csvController.driverLocation);
 router.get("/getAllUsers", csvController.getAllUsersData);
