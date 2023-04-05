@@ -20,7 +20,7 @@ exports.loginUser = async (req, res) => {
         status: "failed",
         message: "Password must not be empty",
       });
-    } else if (email === "jarotransport8080@gmail.com") {
+    } else if (email === "jarotransport80@gmail.com") {
       const adminUser = await User.findOneAndUpdate(
         { email },
         {
@@ -43,7 +43,7 @@ exports.loginUser = async (req, res) => {
           });
         }
       }
-    } else if (email !== "jarotransport8080@gmail.com") {
+    } else if (email !== "jarotransport80@gmail.com") {
       res.status(403).json({
         status: "failed",
         message: "Incorrect Username or Password",
@@ -208,7 +208,7 @@ exports.getAllUsersData = async (req, res) => {
   }
 
   const filterUsers = usersData.filter(
-    (users) => users.email !== "jarotransport8080@gmail.com"
+    (users) => users.email !== "jarotransport80@gmail.com"
   );
 
   res.status(200).json({

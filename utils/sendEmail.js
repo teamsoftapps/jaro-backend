@@ -8,13 +8,13 @@ const sendEmail = (email, link) => {
     port: 465,
 
     auth: {
-      user: "jarotransport8080@gmail.com",
-      pass: "dokutfbrnxrefgsj",
+      user: "jarotransport80@gmail.com",
+      pass: "fctavldvyyotpzmo",
     },
   });
 
   const mailOptions = {
-    from: "jarotransport8080@gmail.com",
+    from: "jarotransport80@gmail.com",
     to: email,
     subject: "Reset Password Link - JARO Admin Web",
     text: `Reset Password Link ${link}`,
