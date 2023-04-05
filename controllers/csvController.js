@@ -151,8 +151,8 @@ exports.driverLocation = async (req, res) => {
 
   try {
     const driverLocation = await User.findOneAndUpdate(
-      orderNumber,
-      { driverCoordinates: { longitude: "30", latitude: 20 } },
+      { orderNumber },
+      { driverCoordinates: driverCoordinates },
       { new: true }
     );
 
