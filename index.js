@@ -28,8 +28,8 @@ app.use("/api/uploadCsv", csvRoutes);
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 const mongodbUri =
-  // "mongodb+srv://jaro-admin:0YjGozxwl2inNEnl@cluster0.pdsddkf.mongodb.net/test";
-  "mongodb://127.0.0.1:27017/jaro";
+  "mongodb+srv://jaro-admin:0YjGozxwl2inNEnl@cluster0.pdsddkf.mongodb.net/test";
+// "mongodb://127.0.0.1:27017/jaro";
 
 mongoose.connect(mongodbUri, {
   useNewUrlParser: true,

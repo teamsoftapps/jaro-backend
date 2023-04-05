@@ -93,7 +93,8 @@ exports.forgetPassword = async (req, res) => {
   console.log("admin Exists", req.body);
 
   if (adminExists) {
-    const link = `http://localhost:3000/authentication/resetPassword`;
+    // const link = `http://localhost:3000/authentication/resetPassword`;
+    const link = `https://jaro-admin-web.vercel.app/authentication/resetPassword`;
     sendEmail(adminExists.email, link);
 
     res.status(201).json({
