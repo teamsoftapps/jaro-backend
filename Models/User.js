@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema(
       // required: true,
     },
     driverCoordinates: {
-      type: Object,
+      type: String,
     },
   },
   {
