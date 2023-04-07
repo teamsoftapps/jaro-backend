@@ -218,8 +218,8 @@ exports.getAllUsersData = async (req, res) => {
 };
 
 exports.getSingleUser = async (req, res) => {
-  const { orderNumber } = req.params;
-  const singleUser = await User.findOne({ orderNumber });
+  const { _id } = req.params;
+  const singleUser = await User.findOne({ _id });
 
   if (!singleUser) {
     res.status(400).json({
