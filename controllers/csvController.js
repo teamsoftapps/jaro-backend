@@ -218,8 +218,8 @@ exports.getAllUsersData = async (req, res) => {
 };
 
 exports.getSingleUser = async (req, res) => {
-  const { _id } = req.params;
-  const singleUser = await User.findOne({ _id });
+  const { id } = req.params;
+  const singleUser = await User.findById({ _id: id });
 
   if (!singleUser) {
     res.status(400).json({
