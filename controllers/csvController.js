@@ -216,3 +216,20 @@ exports.getAllUsersData = async (req, res) => {
     data: filterUsers,
   });
 };
+
+exports.getSingleUser = async (req, res) => {
+  const { orderNumber } = req.body;
+  const singleUser = await User.findOne({ orderNumber });
+
+  if (!singleUser) {
+    res.status(400).json({
+      status: "failed",
+      message: "No user with this order number",
+    });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: singleUser,
+  });
+};
