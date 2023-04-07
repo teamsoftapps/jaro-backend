@@ -45,6 +45,6 @@ router.patch("/resetPassword", csvController.resetPassword);
 router.post("/appLogin", csvController.appLoginOrderNumber);
 router.patch("/driverLocation", csvController.driverLocation);
 router.get("/getAllUsers", csvController.getAllUsersData);
-router.post("/getSingleUser", csvController.getSingleUser);
+router.get("/getSingleUser", csvController.getSingleUser);
 
 module.exports = router;
