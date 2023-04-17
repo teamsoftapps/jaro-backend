@@ -84,9 +84,9 @@ exports.appLoginOrderNumber = async (req, res) => {
         data: driver,
       });
     } else if (driver.password !== password) {
-      res.status(201).json({
+      res.status(401).json({
         status: "failed",
-        message: "Password is incorrect!",
+        message: "Incorrect Password!",
       });
     }
   }
