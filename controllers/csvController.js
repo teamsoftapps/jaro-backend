@@ -233,3 +233,30 @@ exports.getSingleUser = async (req, res) => {
     data: singleUser,
   });
 };
+
+exports.driverSearch = async (req, res) => {
+  const searchTerm = req.query.term;
+
+  if (!searchTerm) {
+    res.status(400).json({
+      status: "failed",
+      message: "Please enter driver name",
+    });
+  }
+
+  await User.createIndex({ driverName: "text" });
+
+  try {
+    const searchResults = await User.find({ $text: { $search: searchTerm } });
+
+    res.status(200).json({
+      status: "success",
+      data: searchResults,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "failed",
+      message: "No driver name found!",
+    });
+  }
+};

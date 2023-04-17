@@ -46,5 +46,6 @@ router.post("/appLogin", csvController.appLoginOrderNumber);
 router.patch("/driverLocation", csvController.driverLocation);
 router.get("/getAllUsers", csvController.getAllUsersData);
 router.get("/getSingleUser/:id", csvController.getSingleUser);
+router.get("/search", csvController.driverSearch);
 
 module.exports = router;
