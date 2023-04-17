@@ -47,5 +47,7 @@ router.patch("/driverLocation", csvController.driverLocation);
 router.get("/getAllUsers", csvController.getAllUsersData);
 router.get("/getSingleUser/:id", csvController.getSingleUser);
 router.get("/search", csvController.driverSearch);
+router.get("/lastWeekData", csvController.lastWeekData);
+router.patch("/updateDriverPassword", csvController.updateDriverPassword);
 
 module.exports = router;

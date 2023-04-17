@@ -260,3 +260,50 @@ exports.driverSearch = async (req, res) => {
     });
   }
 };
+
+exports.lastWeekData = async (req, res) => {
+  const currentDate = new Date();
+  const lastWeekStartDate = new Date();
+  lastWeekStartDate.setDate(currentDate.getDate() - 7); // Subtract 7 days from current date
+
+  const query = {
+    createdAt: {
+      $gte: lastWeekStartDate,
+      $lt: currentDate,
+    },
+  };
+
+  const lastWeek = await User.find(query);
+
+  res.status(200).json({
+    status: "success",
+    data: lastWeek,
+  });
+};
+
+exports.updateDriverPassword = async (req, res) => {
+  const { orderNumber, newPassword } = req.body;
+
+  try {
+    const updateDriverPassword = await User.findOneAndUpdate(
+      { orderNumber },
+      {
+        $set: {
+          password: newPassword,
+        },
+      },
+      { new: true }
+    );
+
+    res.status(201).json({
+      status: "success",
+      message: "Your password has been updated!",
+      data: updateDriverPassword,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      message: err,
+    });
+  }
+};
