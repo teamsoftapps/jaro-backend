@@ -69,7 +69,7 @@ exports.appLoginOrderNumber = async (req, res) => {
       status: "failed",
       message: "Password cannot be empty!",
     });
-  } else if (orderNumber) {
+  } else if (orderNumber && password) {
     const driver = await User.findOne({ orderNumber });
     if (!driver) {
       res.status(401).json({
@@ -78,10 +78,17 @@ exports.appLoginOrderNumber = async (req, res) => {
       });
     }
 
-    res.status(201).json({
-      status: "success",
-      data: driver,
-    });
+    if (driver.password === password) {
+      res.status(201).json({
+        status: "success",
+        data: driver,
+      });
+    } else if (driver.password !== password) {
+      res.status(201).json({
+        status: "failed",
+        message: "Password is incorrect!",
+      });
+    }
   }
 };
 
