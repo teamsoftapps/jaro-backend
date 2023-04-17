@@ -287,11 +287,7 @@ exports.updateDriverPassword = async (req, res) => {
   try {
     const updateDriverPassword = await User.findOneAndUpdate(
       { orderNumber },
-      {
-        $set: {
-          password: newPassword,
-        },
-      },
+      { password: newPassword },
       { new: true }
     );
 
